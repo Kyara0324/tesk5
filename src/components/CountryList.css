@@ -1,0 +1,57 @@
+.country-list {
+  padding: 20px;
+}
+
+.country-list h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.country-grid {
+  display: grid;
+  /* grid-template-columns: repeat(
+    auto-fill,
+    minmax(200px, 1fr)
+  ); 수정: 최소 너비를 200px로 설정 */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px; /* 수정: 간격을 20px로 설정 */
+  list-style: none;
+  padding: 0;
+}
+
+.country-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #f9f9f9;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.country-item.favorite {
+  border-color: green;
+}
+
+.country-item:hover {
+  transform: scale(1.05);
+}
+
+.country-flag {
+  width: 100px; /* 수정: 플래그 너비를 100px로 설정 */
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.country-info h2 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.country-info p {
+  margin: 5px 0 0;
+  color: #666;
+}
