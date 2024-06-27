@@ -7,15 +7,18 @@ const App: React.FC = () => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [favorites, setFavorites] = useState<Country[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const getCountries = async () => {
       try {
         const data = await fetchCountries();
-        setCountries(data);
-      } catch (error: any) {
-        setError(error.message);
+        const sortedCountries = data.sort((a, b) =>
+          a.name.common.localeCompare(b.name.common)
+        );
+        setCountries(sortedCountries);
+      } catch (error) {
+        setError(error as Error);
       } finally {
         setLoading(false);
       }
@@ -29,11 +32,15 @@ const App: React.FC = () => {
       setFavorites(
         favorites.filter((fav) => fav.name.common !== country.name.common)
       );
-      setCountries([...countries, country]);
+      setCountries((prevCountries) =>
+        [...prevCountries, country].sort((a, b) =>
+          a.name.common.localeCompare(b.name.common)
+        )
+      );
     } else {
       setFavorites([...favorites, country]);
-      setCountries(
-        countries.filter((c) => c.name.common !== country.name.common)
+      setCountries((prevCountries) =>
+        prevCountries.filter((c) => c.name.common !== country.name.common)
       );
     }
   };
@@ -43,7 +50,7 @@ const App: React.FC = () => {
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>Error: {error.message}</div>;
   }
 
   return (
