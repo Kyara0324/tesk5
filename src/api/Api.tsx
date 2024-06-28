@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-// 국가 데이터를 저장할 타입 정의
 interface Country {
   name: {
     common: string;
@@ -16,7 +15,6 @@ const App: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // API 호출 함수 정의
     const fetchCountries = async () => {
       try {
         const response = await fetch("https://restcountries.com/v3.1/all");
@@ -32,7 +30,6 @@ const App: React.FC = () => {
       }
     };
 
-    // 함수 호출
     fetchCountries();
   }, []);
 

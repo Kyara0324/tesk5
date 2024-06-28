@@ -1,5 +1,3 @@
-// src/api/fetchCountries.ts
-
 import { Country } from "../types/Country";
 
 const API_URL = "https://restcountries.com/v3.1/all";
